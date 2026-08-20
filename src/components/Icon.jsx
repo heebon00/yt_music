@@ -24,6 +24,8 @@ const PATHS = {
   down: 'M6.4 9.2L12 14.8l5.6-5.6 1.5 1.5-7.1 7-7.1-7z',
   up: 'M6.4 14.8L12 9.2l5.6 5.6 1.5-1.5-7.1-7-7.1 7z',
   grid: 'M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z',
+  'chevron-right': 'M9.2 6.4L14.8 12l-5.6 5.6 1.5 1.5 7-7.1-7-7.1z',
+  'chevron-left': 'M14.8 6.4L9.2 12l5.6 5.6-1.5 1.5-7-7.1 7-7.1z',
 };
 
 export default function Icon({ name, size = 24, className = '' }) {
