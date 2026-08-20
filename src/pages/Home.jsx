@@ -10,7 +10,7 @@ import { myPlaylists, fromShorts, quickPicks, musicVideos, randomCover } from '.
 import { usePlayer } from '../store/playerContext';
 
 export default function Home() {
-  const { track, isPlaying, toggle, play } = usePlayer();
+  const { play } = usePlayer();
 
   // 재생목록 대표 자켓은 수록곡 중 하나를 무작위로. 한 번만 뽑아 렌더마다 바뀌지 않게 합니다.
   const playlists = useMemo(
@@ -35,7 +35,7 @@ export default function Home() {
         </div>
       </header>
 
-      <ContinueCard track={track} isPlaying={isPlaying} onToggle={toggle} />
+      <ContinueCard />
 
       <section className="pt-8">
         <SectionHeader title="나의 재생목록" />

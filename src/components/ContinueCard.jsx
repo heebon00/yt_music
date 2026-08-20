@@ -1,11 +1,15 @@
 import Cover from './Cover';
 import Icon from './Icon';
+import { usePlayer } from '../store/playerContext';
 
 /**
  * 이어듣기 카드 — 이 리디자인의 핵심.
  * 앱을 열자마자 마지막 재생 지점으로 1탭 복귀. 하단의 얇은 라인이 어디까지 들었는지입니다.
  */
-export default function ContinueCard({ track, isPlaying, onToggle }) {
+export default function ContinueCard() {
+  // 미니 플레이어와 같은 소스를 봅니다. 어느 화면에서 곡을 눌러도 둘이 함께 바뀝니다.
+  const { track, isPlaying, progress, toggle } = usePlayer();
+
   return (
     <div className="relative mx-5 overflow-hidden rounded-card bg-elevated lg:mx-8">
       <div className="flex items-center gap-4 p-3">
@@ -17,7 +21,7 @@ export default function ContinueCard({ track, isPlaying, onToggle }) {
         </div>
         <button
           type="button"
-          onClick={onToggle}
+          onClick={toggle}
           aria-label={isPlaying ? '일시정지' : '재생'}
           className="grid size-11 shrink-0 place-items-center rounded-full bg-accent transition-transform active:scale-95"
         >
@@ -26,7 +30,7 @@ export default function ContinueCard({ track, isPlaying, onToggle }) {
       </div>
       {/* 재생 진행률 */}
       <div className="absolute inset-x-0 bottom-0 h-0.5 bg-line">
-        <div className="h-full bg-accent" style={{ width: `${track.progress * 100}%` }} />
+        <div className="h-full bg-accent transition-[width] duration-200" style={{ width: `${progress * 100}%` }} />
       </div>
     </div>
   );

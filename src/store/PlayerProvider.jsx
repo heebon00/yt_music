@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { PlayerContext } from './playerContext';
-import { nowPlaying, queue as initialQueue } from '../data/mock';
+import { nowPlaying, queue as initialQueue, tracks } from '../data/mock';
 
 /**
  * 전역 재생 상태.
@@ -17,14 +17,15 @@ export function PlayerProvider({ children }) {
   const [progress, setProgress] = useState(nowPlaying.progress);
   const [expanded, setExpanded] = useState(false); // 플레이어 전체 화면 여부
 
-  /** 어떤 화면에서 곡을 눌러도 이 하나를 통과합니다 */
+  /**
+   * 어떤 화면에서 곡을 눌러도 이 하나를 통과합니다.
+   * 항목을 통째로 펼쳐 담습니다 — 필드를 골라 담으면 cover 처럼 새로 생긴 값이 조용히 빠집니다.
+   * (재생목록 카드는 artist 대신 sub 에 곡 수가 들어 있어 그것만 맞춰줍니다)
+   */
   const play = useCallback((item) => {
-    setTrack({
-      id: item.id,
-      title: item.title,
-      artist: item.artist ?? item.sub ?? '',
-      art: item.art,
-    });
+    // 재생목록 카드를 누르면 목록 자체가 아니라 수록곡 첫 곡이 재생되어야 합니다
+    const t = item.trackIds ? tracks[item.trackIds[0]] : item;
+    setTrack({ ...t, artist: t.artist ?? t.sub ?? '' });
     setProgress(0);
     setIsPlaying(true);
     setLiked(false);
