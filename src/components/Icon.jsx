@@ -1,7 +1,7 @@
 /**
  * 아이콘 세트 — 피그마 `Icon` 컴포넌트(16 variants)와 같은 패스입니다.
  * 색은 currentColor 라서 부모의 text-* 클래스를 그대로 따라갑니다.
- *   <Icon name="play" className="text-accent" />
+ *   <Icon name="play" className="text-accent-bright" />
  */
 
 const PATHS = {

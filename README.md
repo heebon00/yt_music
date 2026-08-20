@@ -89,9 +89,19 @@
   --color-base: #0b0b0c;      --color-primary: #f1f1f1;
   --color-surface: #17171a;   --color-secondary: #9a9aa2;
   --color-elevated: #1f1f24;  --color-disabled: #6a6a72;
-  --color-line: #2a2a30;      --color-accent: #ff2d55;
+  --color-line: #2a2a30;      --color-accent: #cf032a;
+                              --color-accent-bright: #fb0433;
 }
 ```
+
+강조색을 **두 개로 나눴습니다.** 하나로 쓰면 한쪽이 반드시 대비 기준에 걸립니다.
+
+| | 용도 | 대비 |
+| :-- | :-- | :-- |
+| `accent` `#CF032A` | 버튼 · 칩 · 프로그레스 등 채워진 면 | 위에 올라가는 흰 글자와 **5.68:1** |
+| `accent-bright` `#FB0433` | 어두운 배경 위 글자 · 아이콘 | 배경과 **4.84:1** |
+
+같은 색 하나로 통일하면 버튼은 3.65:1, 글자는 3.47:1 로 둘 다 WCAG AA(4.5:1)에 못 미칩니다.
 
 - **타이포** Pretendard — Display 24 Bold / Title 20 SemiBold / Body 15 Medium / Caption 11 Medium
 - **아이콘** 24px 그리드 16종 (피그마 variants ↔ React `<Icon name="…" />` 동일 패스)

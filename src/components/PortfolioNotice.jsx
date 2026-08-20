@@ -76,7 +76,7 @@ export default function PortfolioNotice() {
 
         <div className="space-y-4 px-6 pt-5">
           <div className="space-y-1">
-            <p className="text-[15px] font-bold text-accent">이 프로젝트는 구직용 포트폴리오입니다.</p>
+            <p className="text-[15px] font-bold text-accent-bright">이 프로젝트는 구직용 포트폴리오입니다.</p>
             <p className="text-sm font-bold">YouTube · Google과 무관한 비공식 재해석입니다.</p>
           </div>
 

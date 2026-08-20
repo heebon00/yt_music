@@ -25,7 +25,7 @@ export default function Sidebar({ active, onChange }) {
                   aria-current={on ? 'page' : undefined}
                   className={`flex w-full items-center gap-3.5 rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
                     on
-                      ? 'bg-elevated font-semibold text-accent'
+                      ? 'bg-elevated font-semibold text-accent-bright'
                       : 'text-secondary hover:bg-elevated/60 hover:text-primary'
                   }`}
                 >

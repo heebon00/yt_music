@@ -30,7 +30,7 @@ export default function Playlist() {
         >
         <Cover item={track} className="size-16 shrink-0 rounded-art" />
         <div className="min-w-0 flex-1">
-          <p className="text-[10px] font-semibold tracking-[0.08em] text-accent">
+          <p className="text-[10px] font-semibold tracking-[0.08em] text-accent-bright">
             지금 재생 중 · 대기열 {queue.length + 9}곡
           </p>
           <p className="mt-0.5 truncate text-[17px] font-semibold tracking-tight">{track.title}</p>

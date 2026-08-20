@@ -8,7 +8,7 @@ export default function TrackRow({ item, onPlay, active = false }) {
       <button type="button" onClick={() => onPlay?.(item)} className="flex min-w-0 flex-1 items-center gap-4 text-left">
         <Cover item={item} className="size-11 shrink-0 rounded-md" />
         <div className="min-w-0">
-          <p className={`truncate text-[15px] font-medium ${active ? 'text-accent' : ''}`}>{item.title}</p>
+          <p className={`truncate text-[15px] font-medium ${active ? 'text-accent-bright' : ''}`}>{item.title}</p>
           <p className="mt-0.5 truncate text-[13px] text-secondary">{item.artist}</p>
         </div>
       </button>

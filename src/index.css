@@ -15,8 +15,11 @@
   --color-secondary: #9a9aa2;
   --color-disabled: #6a6a72;
 
-  --color-accent: #ff2d55;
-  --color-accent-dim: #3a121f;
+  /* 채워진 면(버튼 · 칩 · 프로그레스)에 씁니다. 흰 글자와 5.68:1 */
+  --color-accent: #cf032a;
+  /* 어두운 배경 위 글자 · 아이콘에 씁니다. 배경과 4.84:1 (같은 색은 3.47:1 로 미달) */
+  --color-accent-bright: #fb0433;
+  --color-accent-dim: #39050f;
 
   --font-sans: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
 

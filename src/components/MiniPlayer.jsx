@@ -27,7 +27,7 @@ export default function MiniPlayer() {
           onClick={() => setLiked((v) => !v)}
           aria-label="좋아요"
           aria-pressed={liked}
-          className={`shrink-0 transition-colors ${liked ? 'text-accent' : 'text-secondary hover:text-primary'}`}
+          className={`shrink-0 transition-colors ${liked ? 'text-accent-bright' : 'text-secondary hover:text-primary'}`}
         >
           <Icon name="heart" size={20} />
         </button>

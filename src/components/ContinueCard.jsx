@@ -11,7 +11,7 @@ export default function ContinueCard({ track, isPlaying, onToggle }) {
       <div className="flex items-center gap-4 p-3">
         <Cover item={track} className="size-16 shrink-0 rounded-art" />
         <div className="min-w-0 flex-1">
-          <p className="text-[10px] font-semibold tracking-[0.08em] text-accent">이어듣기</p>
+          <p className="text-[10px] font-semibold tracking-[0.08em] text-accent-bright">이어듣기</p>
           <p className="mt-0.5 truncate text-[17px] font-semibold tracking-tight">{track.title}</p>
           <p className="mt-1 truncate text-[13px] text-secondary">{track.artist}</p>
         </div>

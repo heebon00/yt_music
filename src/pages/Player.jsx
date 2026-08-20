@@ -41,7 +41,7 @@ export default function Player() {
           onClick={() => setLiked((v) => !v)}
           aria-label="좋아요"
           aria-pressed={liked}
-          className={`shrink-0 pt-1 transition-colors ${liked ? 'text-accent' : 'text-disabled hover:text-secondary'}`}
+          className={`shrink-0 pt-1 transition-colors ${liked ? 'text-accent-bright' : 'text-disabled hover:text-secondary'}`}
         >
           <Icon name="heart" size={22} />
         </button>
@@ -92,7 +92,7 @@ export default function Player() {
               key={line}
               className={
                 i === lyrics.activeIndex
-                  ? 'text-[17px] font-semibold text-accent'
+                  ? 'text-[17px] font-semibold text-accent-bright'
                   : 'text-[15px] text-disabled'
               }
             >
@@ -105,7 +105,7 @@ export default function Player() {
       {/* 대기열 시트 — 접히지 않고 늘 보입니다 */}
       <div className="mx-5 mt-6 mb-6 overflow-hidden rounded-card bg-elevated">
         <div className="flex items-center justify-between px-4 pt-3.5">
-          <p className="text-[10px] font-semibold tracking-[0.08em] text-accent">다음 곡</p>
+          <p className="text-[10px] font-semibold tracking-[0.08em] text-accent-bright">다음 곡</p>
           <button type="button" aria-label="대기열 펼치기" className="text-secondary hover:text-primary">
             <Icon name="up" size={18} />
           </button>

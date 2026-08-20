@@ -18,7 +18,7 @@ export default function TabBar({ active, onChange }) {
                 onClick={() => onChange(tab.id)}
                 aria-current={on ? 'page' : undefined}
                 className={`flex size-full flex-col items-center justify-center gap-1 transition-colors ${
-                  on ? 'text-accent' : 'text-disabled hover:text-secondary'
+                  on ? 'text-accent-bright' : 'text-disabled hover:text-secondary'
                 }`}
               >
                 <Icon name={tab.icon} size={24} />
