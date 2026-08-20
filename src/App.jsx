@@ -26,8 +26,12 @@ function Shell() {
       <div className="flex min-h-0 flex-1">
         <Sidebar active={tab} onChange={setTab} />
 
-        <div className="relative flex min-h-0 flex-1 flex-col">
-          <main className="no-scrollbar flex-1 overflow-y-auto">
+        {/*
+          min-w-0 이 없으면 안쪽 가로 캐러셀의 최소 너비 때문에 이 컬럼이 화면 밖으로 밀려납니다.
+          (flex 자식의 기본값 min-width:auto — 가로 스크롤 영역을 품을 때 반드시 0으로 눌러줘야 합니다)
+        */}
+        <div className="relative flex min-h-0 w-0 min-w-0 flex-1 flex-col">
+          <main className="no-scrollbar min-w-0 flex-1 overflow-y-auto">
             {/* key를 주면 탭이 바뀔 때마다 페이드인이 다시 실행됩니다 */}
             <div key={tab} className="animate-fade-in mx-auto w-full max-w-[1120px]">
               <Page />
