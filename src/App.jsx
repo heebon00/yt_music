@@ -41,7 +41,7 @@ function Shell() {
           <main className="no-scrollbar min-w-0 flex-1 overflow-y-auto">
             {/* key를 주면 탭이 바뀔 때마다 페이드인이 다시 실행됩니다 */}
             <div key={tab} className="animate-fade-in mx-auto w-full max-w-[1120px]">
-              <Page />
+              <Page onNavigate={handleTabChange} />
             </div>
           </main>
 

@@ -9,7 +9,7 @@ import Carousel from '../components/Carousel';
 import { myPlaylists, fromShorts, quickPicks, musicVideos, randomCover } from '../data/mock';
 import { usePlayer } from '../store/playerContext';
 
-export default function Home() {
+export default function Home({ onNavigate }) {
   const { play } = usePlayer();
 
   // 재생목록 대표 자켓은 수록곡 중 하나를 무작위로. 한 번만 뽑아 렌더마다 바뀌지 않게 합니다.
@@ -26,7 +26,12 @@ export default function Home() {
           <h1 className="mt-1 truncate text-2xl font-bold tracking-tight">이어서 들을까요?</h1>
         </div>
         <div className="flex shrink-0 items-center gap-3 pt-1">
-          <button type="button" aria-label="검색" className="text-primary transition-colors hover:text-secondary">
+          <button
+            type="button"
+            onClick={() => onNavigate?.('search')}
+            aria-label="검색"
+            className="text-primary transition-colors hover:text-secondary cursor-pointer"
+          >
             <Icon name="search" size={24} />
           </button>
           <span className="grid size-7 place-items-center rounded-full bg-elevated text-xs font-semibold text-secondary">
