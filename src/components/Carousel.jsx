@@ -40,29 +40,50 @@ export default function Carousel({ children }) {
   };
 
   /* ── 마우스 드래그 스크롤 ─────────────────── */
-  const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false });
+  const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false, pointerId: null });
 
   const onPointerDown = (e) => {
     if (e.pointerType !== 'mouse' || e.button !== 0) return;
     const el = ref.current;
-    drag.current = { active: true, startX: e.clientX, startLeft: el.scrollLeft, moved: false };
-    el.setPointerCapture(e.pointerId);
-    setDragging(true);
+    drag.current = {
+      active: true,
+      startX: e.clientX,
+      startLeft: el?.scrollLeft || 0,
+      moved: false,
+      pointerId: e.pointerId,
+    };
   };
 
   const onPointerMove = (e) => {
     const d = drag.current;
     if (!d.active) return;
     const dx = e.clientX - d.startX;
-    if (Math.abs(dx) > 4) d.moved = true; // 4px 넘게 움직였으면 클릭이 아니라 드래그로 봅니다
-    ref.current.scrollLeft = d.startLeft - dx;
+    if (Math.abs(dx) > 4) {
+      if (!d.moved) {
+        d.moved = true;
+        setDragging(true);
+        try {
+          ref.current?.setPointerCapture?.(e.pointerId);
+        } catch {
+          /* noop */
+        }
+      }
+      if (ref.current) {
+        ref.current.scrollLeft = d.startLeft - dx;
+      }
+    }
   };
 
   const endDrag = (e) => {
-    if (!drag.current.active) return;
-    drag.current.active = false;
+    const d = drag.current;
+    if (!d.active) return;
+    d.active = false;
     setDragging(false);
-    ref.current?.releasePointerCapture?.(e.pointerId);
+    try {
+      ref.current?.releasePointerCapture?.(e.pointerId);
+    } catch {
+      /* noop */
+    }
   };
 
   // 드래그로 끝났다면 카드의 클릭(재생)이 실행되지 않도록 막습니다

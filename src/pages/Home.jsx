@@ -22,7 +22,7 @@ export default function Home() {
     <div className="pb-8">
       <header className="flex items-start justify-between gap-3 px-5 pt-5 pb-6 lg:px-8">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[10px] font-medium tracking-[0.1em] text-secondary">MONDAY EVENING</p>
+          <p className="truncate text-[10px] font-medium tracking-[0.1em] text-secondary">ENJOY YOUR MUSIC</p>
           <h1 className="mt-1 truncate text-2xl font-bold tracking-tight">이어서 들을까요?</h1>
         </div>
         <div className="flex shrink-0 items-center gap-3 pt-1">
