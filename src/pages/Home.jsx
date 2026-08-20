@@ -10,7 +10,13 @@ import { usePlayer } from '../store/playerContext';
 
 /** 가로 스크롤 줄 — 모든 캐러셀이 이걸 씁니다. 좌우 여백 20px을 안쪽 패딩으로 줘서 첫 카드가 화면 끝에 붙지 않게 합니다. */
 function Row({ children }) {
-  return <div className="no-scrollbar flex gap-2 overflow-x-auto px-5 lg:px-8 pb-1">{children}</div>;
+  return (
+    <div className="no-scrollbar flex gap-2 overflow-x-auto px-5 pb-1 lg:px-8">
+      {children}
+      {/* 스크롤 컨테이너의 padding-right 를 무시하는 브라우저가 있어, 끝에 여백용 스페이서를 둡니다 */}
+      <span aria-hidden="true" className="w-1 shrink-0" />
+    </div>
+  );
 }
 
 export default function Home() {
@@ -24,12 +30,12 @@ export default function Home() {
 
   return (
     <div className="pb-8">
-      <header className="flex items-start justify-between px-5 lg:px-8 pt-5 pb-6">
-        <div>
-          <p className="text-[10px] font-medium tracking-[0.1em] text-secondary">MONDAY EVENING</p>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight">이어서 들을까요?</h1>
+      <header className="flex items-start justify-between gap-3 px-5 pt-5 pb-6 lg:px-8">
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-[10px] font-medium tracking-[0.1em] text-secondary">MONDAY EVENING</p>
+          <h1 className="mt-1 truncate text-2xl font-bold tracking-tight">이어서 들을까요?</h1>
         </div>
-        <div className="flex items-center gap-3 pt-1">
+        <div className="flex shrink-0 items-center gap-3 pt-1">
           <button type="button" aria-label="검색" className="text-primary transition-colors hover:text-secondary">
             <Icon name="search" size={24} />
           </button>

@@ -15,9 +15,9 @@ export default function Library() {
 
   return (
     <div className="pb-8">
-      <div className="flex items-center justify-between px-5 lg:px-8 pt-5 pb-4">
-        <h1 className="text-2xl font-bold tracking-tight">보관함</h1>
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-3 px-5 pt-5 pb-4 lg:px-8">
+        <h1 className="min-w-0 flex-1 truncate text-2xl font-bold tracking-tight">보관함</h1>
+        <div className="flex shrink-0 items-center gap-3">
           <button type="button" aria-label="검색" className="text-primary hover:text-secondary">
             <Icon name="search" size={24} />
           </button>

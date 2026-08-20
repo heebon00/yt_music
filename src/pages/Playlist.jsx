@@ -15,9 +15,9 @@ export default function Playlist() {
 
   return (
     <div className="pb-8">
-      <div className="flex items-center justify-between px-5 lg:px-8 pt-5 pb-4">
-        <h1 className="text-2xl font-bold tracking-tight">재생목록</h1>
-        <button type="button" aria-label="새 재생목록" className="text-primary hover:text-secondary">
+      <div className="flex items-center justify-between gap-3 px-5 pt-5 pb-4 lg:px-8">
+        <h1 className="min-w-0 flex-1 truncate text-2xl font-bold tracking-tight">재생목록</h1>
+        <button type="button" aria-label="새 재생목록" className="shrink-0 text-primary hover:text-secondary">
           <Icon name="plus" size={24} />
         </button>
       </div>
