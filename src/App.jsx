@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PortfolioNotice from './components/PortfolioNotice';
 import Sidebar from './components/Sidebar';
 import TabBar from './components/TabBar';
 import MiniPlayer from './components/MiniPlayer';
@@ -52,6 +53,7 @@ function Shell() {
 export default function App() {
   return (
     <PlayerProvider>
+      <PortfolioNotice />
       <Shell />
     </PlayerProvider>
   );
