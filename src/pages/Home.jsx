@@ -1,10 +1,11 @@
+import { useMemo } from 'react';
 import Icon from '../components/Icon';
 import SectionHeader from '../components/SectionHeader';
 import ContinueCard from '../components/ContinueCard';
 import AlbumCard from '../components/AlbumCard';
 import ShortsCard from '../components/ShortsCard';
 import VideoCard from '../components/VideoCard';
-import { myPlaylists, fromShorts, quickPicks, musicVideos } from '../data/mock';
+import { myPlaylists, fromShorts, quickPicks, musicVideos, randomCover } from '../data/mock';
 import { usePlayer } from '../store/playerContext';
 
 /** 가로 스크롤 줄 — 모든 캐러셀이 이걸 씁니다. 좌우 여백 20px을 안쪽 패딩으로 줘서 첫 카드가 화면 끝에 붙지 않게 합니다. */
@@ -14,6 +15,12 @@ function Row({ children }) {
 
 export default function Home() {
   const { track, isPlaying, toggle, play } = usePlayer();
+
+  // 재생목록 대표 자켓은 수록곡 중 하나를 무작위로. 한 번만 뽑아 렌더마다 바뀌지 않게 합니다.
+  const playlists = useMemo(
+    () => myPlaylists.map((p) => ({ ...p, cover: randomCover(p.trackIds) })),
+    [],
+  );
 
   return (
     <div className="pb-8">
@@ -37,7 +44,7 @@ export default function Home() {
       <section className="pt-8">
         <SectionHeader title="나의 재생목록" />
         <Row>
-          {myPlaylists.map((item) => (
+          {playlists.map((item) => (
             <AlbumCard key={item.id} item={item} onPlay={play} />
           ))}
         </Row>

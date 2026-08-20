@@ -1,12 +1,17 @@
 import Cover from '../components/Cover';
+import { useMemo } from 'react';
 import Icon from '../components/Icon';
 import TrackRow from '../components/TrackRow';
-import { playlistRows, recentLists, queue } from '../data/mock';
+import { playlistRows, recentLists, queue, randomCover } from '../data/mock';
 import { usePlayer } from '../store/playerContext';
 
 /** 재생목록 — 이 탭의 존재 이유가 맨 위 '지금 재생 중' 카드입니다. */
 export default function Playlist() {
   const { track, play, openPlayer } = usePlayer();
+
+  // 재생목록 대표 자켓 — 수록곡 중 무작위로 한 번만 뽑습니다
+  const mine = useMemo(() => playlistRows.map((p) => ({ ...p, cover: randomCover(p.trackIds) })), []);
+  const recent = useMemo(() => recentLists.map((p) => ({ ...p, cover: randomCover(p.trackIds) })), []);
 
   return (
     <div className="pb-8">
@@ -42,14 +47,14 @@ export default function Playlist() {
             전체 보기
           </button>
         </div>
-        {playlistRows.map((item) => (
+        {mine.map((item) => (
           <TrackRow key={item.id} item={item} onPlay={play} />
         ))}
       </section>
 
       <section className="pt-7">
         <h2 className="mb-2 px-5 lg:px-8 text-[15px] font-semibold">최근 들은 목록</h2>
-        {recentLists.map((item) => (
+        {recent.map((item) => (
           <TrackRow key={item.id} item={item} onPlay={play} />
         ))}
       </section>
