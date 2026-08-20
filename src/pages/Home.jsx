@@ -5,13 +5,16 @@ import AlbumCard from '../components/AlbumCard';
 import ShortsCard from '../components/ShortsCard';
 import VideoCard from '../components/VideoCard';
 import { myPlaylists, fromShorts, quickPicks, musicVideos } from '../data/mock';
+import { usePlayer } from '../store/playerContext';
 
 /** 가로 스크롤 줄 — 모든 캐러셀이 이걸 씁니다. 좌우 여백 20px을 안쪽 패딩으로 줘서 첫 카드가 화면 끝에 붙지 않게 합니다. */
 function Row({ children }) {
   return <div className="no-scrollbar flex gap-2 overflow-x-auto px-5 pb-1">{children}</div>;
 }
 
-export default function Home({ track, isPlaying, onToggle, onPlay }) {
+export default function Home() {
+  const { track, isPlaying, toggle, play } = usePlayer();
+
   return (
     <div className="pb-8">
       <header className="flex items-start justify-between px-5 pt-5 pb-6">
@@ -29,13 +32,13 @@ export default function Home({ track, isPlaying, onToggle, onPlay }) {
         </div>
       </header>
 
-      <ContinueCard track={track} isPlaying={isPlaying} onToggle={onToggle} />
+      <ContinueCard track={track} isPlaying={isPlaying} onToggle={toggle} />
 
       <section className="pt-8">
         <SectionHeader title="나의 재생목록" />
         <Row>
           {myPlaylists.map((item) => (
-            <AlbumCard key={item.id} item={item} onPlay={onPlay} />
+            <AlbumCard key={item.id} item={item} onPlay={play} />
           ))}
         </Row>
       </section>
@@ -44,7 +47,7 @@ export default function Home({ track, isPlaying, onToggle, onPlay }) {
         <SectionHeader title="Shorts에서 들은 음악" />
         <Row>
           {fromShorts.map((item) => (
-            <ShortsCard key={item.id} item={item} onPlay={onPlay} />
+            <ShortsCard key={item.id} item={item} onPlay={play} />
           ))}
         </Row>
       </section>
@@ -53,7 +56,7 @@ export default function Home({ track, isPlaying, onToggle, onPlay }) {
         <SectionHeader title="빠른 선곡" />
         <Row>
           {quickPicks.map((item) => (
-            <AlbumCard key={item.id} item={item} onPlay={onPlay} />
+            <AlbumCard key={item.id} item={item} onPlay={play} />
           ))}
         </Row>
       </section>
@@ -62,7 +65,7 @@ export default function Home({ track, isPlaying, onToggle, onPlay }) {
         <SectionHeader title="맞춤 추천 뮤직비디오" />
         <Row>
           {musicVideos.map((item) => (
-            <VideoCard key={item.id} item={item} onPlay={onPlay} />
+            <VideoCard key={item.id} item={item} onPlay={play} />
           ))}
         </Row>
       </section>
