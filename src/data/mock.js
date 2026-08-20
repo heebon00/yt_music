@@ -165,6 +165,15 @@ export const recentLists = [
 /* ── 재생 대기열 ─────────────────────────────── */
 export const queue = pick('glitch', 'walk', 'first-meet', 'xo', 'istj');
 
+/** 화면에 표시할 대기열 총 곡 수. 목록에 다 그리지는 않으므로 데이터로 따로 둡니다 */
+export const queueCount = 12;
+
+/** '4:02' 같은 표기를 초로 — 진행 바 계산에 씁니다 */
+export const toSeconds = (mmss) => {
+  const [m, s] = mmss.split(':').map(Number);
+  return m * 60 + s;
+};
+
 /**
  * 가사 — 저작권 문제를 피하려고 실제 가사가 아닌 예시 문장을 씁니다.
  * activeIndex: 지금 부르고 있는 줄

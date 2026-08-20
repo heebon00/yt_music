@@ -2,7 +2,7 @@ import Cover from '../components/Cover';
 import { useMemo } from 'react';
 import Icon from '../components/Icon';
 import TrackRow from '../components/TrackRow';
-import { playlistRows, recentLists, queue, randomCover } from '../data/mock';
+import { playlistRows, recentLists, queueCount, randomCover } from '../data/mock';
 import { usePlayer } from '../store/playerContext';
 
 /** 재생목록 — 이 탭의 존재 이유가 맨 위 '지금 재생 중' 카드입니다. */
@@ -31,7 +31,7 @@ export default function Playlist() {
         <Cover item={track} className="size-16 shrink-0 rounded-art" />
         <div className="min-w-0 flex-1">
           <p className="text-[10px] font-semibold tracking-[0.08em] text-accent-bright">
-            지금 재생 중 · 대기열 {queue.length + 9}곡
+            지금 재생 중 · 대기열 {queueCount}곡
           </p>
           <p className="mt-0.5 truncate text-[17px] font-semibold tracking-tight">{track.title}</p>
           <p className="mt-1 truncate text-[13px] text-secondary">{track.artist}</p>

@@ -1,11 +1,11 @@
 import Cover from '../components/Cover';
 import Icon from '../components/Icon';
 import ProgressBar from '../components/ProgressBar';
-import { lyrics, queue } from '../data/mock';
+import { lyrics, queue, queueCount, nowPlaying, toSeconds } from '../data/mock';
 import { usePlayer } from '../store/playerContext';
 
-/** 초 단위 진행률을 mm:ss 로 — duration은 목업이라 고정 242초(4:02) 기준입니다 */
-const TOTAL = 242;
+/** 곡 길이는 목업 데이터에서 가져옵니다 (화면에 값을 직접 적어두지 않습니다) */
+const TOTAL = toSeconds(nowPlaying.duration);
 const fmt = (sec) => `${Math.floor(sec / 60)}:${String(Math.floor(sec % 60)).padStart(2, '0')}`;
 
 /**
@@ -34,7 +34,7 @@ export default function Player() {
         <div className="min-w-0 flex-1 pt-1">
           <p className="truncate text-[22px] font-bold tracking-tight">{track.title}</p>
           <p className="mt-1.5 truncate text-sm text-secondary">{track.artist}</p>
-          <p className="mt-1.5 truncate text-xs text-disabled">다음 곡까지 {queue.length + 9}곡</p>
+          <p className="mt-1.5 truncate text-xs text-disabled">다음 곡까지 {queueCount}곡</p>
         </div>
         <button
           type="button"
