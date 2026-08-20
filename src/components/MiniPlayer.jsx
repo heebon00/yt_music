@@ -1,5 +1,5 @@
+import Cover from './Cover';
 import Icon from './Icon';
-import { artStyle } from '../data/mock';
 import { usePlayer } from '../store/playerContext';
 
 /**
@@ -15,7 +15,7 @@ export default function MiniPlayer() {
       <div className="flex h-15 items-center gap-3 px-4">
         {/* 곡 정보 어디를 눌러도 플레이어가 확장됩니다 */}
         <button type="button" onClick={openPlayer} className="flex min-w-0 flex-1 items-center gap-3 text-left">
-          <div className="size-10 shrink-0 rounded-md" style={artStyle(track.art)} />
+          <Cover item={track} className="size-10 shrink-0 rounded-md" />
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold">{track.title}</p>
             <p className="mt-0.5 truncate text-xs text-secondary">{track.artist}</p>

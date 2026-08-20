@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { artStyle } from '../data/mock';
 
 /** Shorts에서 들은 음악 — 9:16 세로 카드. 곡 정보는 아트 위에 얹습니다. */
 export default function ShortsCard({ item, onPlay }) {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+
   return (
     <button
       type="button"
@@ -9,6 +13,19 @@ export default function ShortsCard({ item, onPlay }) {
       className="group relative aspect-[118/210] w-[118px] shrink-0 lg:w-[150px] overflow-hidden rounded-xl text-left"
       style={artStyle(item.art)}
     >
+      {item.cover && !failed && (
+        <img
+          src={item.cover}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+          className={`absolute inset-0 size-full object-cover transition-opacity duration-300 ${
+            loaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      )}
       <span className="absolute top-2.5 left-2.5 rounded-md bg-black/55 px-2 py-1 text-[9px] font-semibold tracking-widest text-white">
         Shorts
       </span>

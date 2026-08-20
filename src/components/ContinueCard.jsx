@@ -1,5 +1,5 @@
+import Cover from './Cover';
 import Icon from './Icon';
-import { artStyle } from '../data/mock';
 
 /**
  * 이어듣기 카드 — 이 리디자인의 핵심.
@@ -9,7 +9,7 @@ export default function ContinueCard({ track, isPlaying, onToggle }) {
   return (
     <div className="relative mx-5 overflow-hidden rounded-card bg-elevated lg:mx-8">
       <div className="flex items-center gap-4 p-3">
-        <div className="size-16 shrink-0 rounded-art" style={artStyle(track.art)} />
+        <Cover item={track} className="size-16 shrink-0 rounded-art" />
         <div className="min-w-0 flex-1">
           <p className="text-[10px] font-semibold tracking-[0.08em] text-accent">이어듣기</p>
           <p className="mt-0.5 truncate text-[17px] font-semibold tracking-tight">{track.title}</p>

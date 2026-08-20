@@ -1,5 +1,5 @@
+import Cover from './Cover';
 import Icon from './Icon';
-import { artStyle } from '../data/mock';
 
 /**
  * 가로 캐러셀용 정사각 카드 (나의 재생목록 / 빠른 선곡)
@@ -12,7 +12,7 @@ export default function AlbumCard({ item, onPlay }) {
       onClick={() => onPlay?.(item)}
       className="group w-31 shrink-0 text-left lg:w-40"
     >
-      <div className="relative aspect-square w-full overflow-hidden rounded-art" style={artStyle(item.art)}>
+      <Cover item={item} className="aspect-square w-full rounded-art">
         {/* hover 시에만 나타나는 어둠막 + 재생 버튼 */}
         <div className="absolute inset-0 bg-black/35 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100" />
         <span
@@ -23,7 +23,7 @@ export default function AlbumCard({ item, onPlay }) {
         >
           <Icon name="play" size={18} className="ml-0.5 text-white" />
         </span>
-      </div>
+      </Cover>
       <p className="mt-3 truncate text-[13px] font-medium">{item.title}</p>
       <p className="mt-0.5 truncate text-[11px] text-secondary">{item.sub}</p>
     </button>

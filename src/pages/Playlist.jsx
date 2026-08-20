@@ -1,6 +1,7 @@
+import Cover from '../components/Cover';
 import Icon from '../components/Icon';
 import TrackRow from '../components/TrackRow';
-import { playlistRows, recentLists, queue, artStyle } from '../data/mock';
+import { playlistRows, recentLists, queue } from '../data/mock';
 import { usePlayer } from '../store/playerContext';
 
 /** 재생목록 — 이 탭의 존재 이유가 맨 위 '지금 재생 중' 카드입니다. */
@@ -22,7 +23,7 @@ export default function Playlist() {
           onClick={openPlayer}
           className="flex w-full items-center gap-4 rounded-card bg-elevated p-3 text-left transition-colors hover:bg-line/40"
         >
-        <div className="size-16 shrink-0 rounded-art" style={artStyle(track.art)} />
+        <Cover item={track} className="size-16 shrink-0 rounded-art" />
         <div className="min-w-0 flex-1">
           <p className="text-[10px] font-semibold tracking-[0.08em] text-accent">
             지금 재생 중 · 대기열 {queue.length + 9}곡

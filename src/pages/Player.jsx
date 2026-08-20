@@ -1,6 +1,7 @@
+import Cover from '../components/Cover';
 import Icon from '../components/Icon';
 import ProgressBar from '../components/ProgressBar';
-import { lyrics, queue, artStyle } from '../data/mock';
+import { lyrics, queue } from '../data/mock';
 import { usePlayer } from '../store/playerContext';
 
 /** 초 단위 진행률을 mm:ss 로 — duration은 목업이라 고정 242초(4:02) 기준입니다 */
@@ -29,7 +30,7 @@ export default function Player() {
       </div>
 
       <div className="flex items-start gap-6 px-5 pt-8">
-        <div className="size-27 shrink-0 rounded-xl" style={artStyle(track.art)} />
+        <Cover item={track} className="size-27 shrink-0 rounded-xl" />
         <div className="min-w-0 flex-1 pt-1">
           <p className="truncate text-[22px] font-bold tracking-tight">{track.title}</p>
           <p className="mt-1.5 truncate text-sm text-secondary">{track.artist}</p>
@@ -110,7 +111,7 @@ export default function Player() {
           </button>
         </div>
         <div className="flex items-center gap-3 px-4 pt-2.5 pb-3">
-          <div className="size-10 shrink-0 rounded-md" style={artStyle(queue[0].art)} />
+          <Cover item={queue[0]} className="size-10 shrink-0 rounded-md" />
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold">{queue[0].title}</p>
             <p className="mt-0.5 truncate text-[11px] text-secondary">{queue[0].artist}</p>

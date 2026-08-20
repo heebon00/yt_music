@@ -1,14 +1,44 @@
 /**
  * 목업 데이터 — 백엔드 없이 정적으로 화면을 채웁니다.
- * art: [시작색, 끝색] — 앨범 아트를 이미지 대신 그라디언트로 표현합니다.
- *      (디자인 단계부터 그라디언트로 잡아서, 저작권 있는 앨범 이미지를 쓰지 않습니다)
+ *
+ * art:   [시작색, 끝색] — 자켓이 없거나 이미지 로딩 전·실패 시 보이는 그라디언트.
+ *        재생목록·장르처럼 실물 자켓이 없는 항목은 이것만 씁니다.
+ * cover: 실제 앨범 자켓 이미지 주소 (아래 COVERS 참고)
  */
+
+/**
+ * 앨범 자켓 — Apple의 아트워크 CDN 주소를 직접 참조합니다.
+ * 저작권 있는 이미지를 저장소에 복사해 넣지 않기 위해서입니다.
+ * 로딩 실패(오프라인·차단)나 커버가 없는 항목은 아래 art 그라디언트가 그대로 보입니다.
+ */
+const IT = 'https://is1-ssl.mzstatic.com/image/thumb';
+const COVERS = {
+  'bite-me':
+    IT + '/Music116/v4/1c/89/10/1c891026-08a1-bbcd-e18e-b5acfe0bd2c7/196922402876_Cover.jpg/400x400bb.jpg',
+  'glitch':
+    IT + '/Music116/v4/17/3a/82/173a823c-0fc9-48dd-ab7a-d847e39dfd81/NCTDREAM_02_Glitch_Mode_digital_cover.jpg/400x400bb.jpg',
+  'sticker':
+    IT + '/Music125/v4/c7/0c/35/c70c35c4-75de-d483-cf96-d38d1c0b77de/cover.jpg/400x400bb.jpg',
+  'istj':
+    IT + '/Music126/v4/ef/5a/97/ef5a971c-5701-f85b-11b7-85d21d607290/888735944307.png/400x400bb.jpg',
+  'candy':
+    IT + '/Music122/v4/41/0f/bd/410fbda4-aff9-9807-6014-f51bdd19fe3c/Digital_Cover_NCT_DREAM_Candy.jpg/400x400bb.jpg',
+  'first-meet':
+    IT + '/Music211/v4/17/bb/d4/17bbd45f-fee7-a9dd-ff01-e7b174cc1462/196922759543_Cover.jpg/400x400bb.jpg',
+  'sn':
+    IT + '/Music221/v4/b3/3e/3c/b33e3c34-4911-a654-7665-474122fccf7d/196922975639_Cover.jpg/400x400bb.jpg',
+  'mv-bite':
+    IT + '/Music116/v4/1c/89/10/1c891026-08a1-bbcd-e18e-b5acfe0bd2c7/196922402876_Cover.jpg/400x400bb.jpg',
+  'mv-sticker':
+    IT + '/Music125/v4/c7/0c/35/c70c35c4-75de-d483-cf96-d38d1c0b77de/cover.jpg/400x400bb.jpg',
+};
 
 export const nowPlaying = {
   id: 'bite-me',
   title: 'Bite Me',
   artist: 'ENHYPEN',
   art: ['#FF2D55', '#5E0F26'],
+  cover: COVERS['bite-me'],
   progress: 0.33, // 0~1
   currentTime: '2:14',
   duration: '4:02',
@@ -21,21 +51,21 @@ export const myPlaylists = [
 ];
 
 export const fromShorts = [
-  { id: 'sticker', title: 'Sticker', artist: 'NCT 127', art: ['#6B1E3A', '#270B16'] },
-  { id: 'istj', title: 'ISTJ', artist: 'NCT DREAM', art: ['#1E5A4A', '#0B241D'] },
-  { id: 'candy', title: 'Candy', artist: 'NCT DREAM', art: ['#3A2B6B', '#140F27'] },
+  { id: 'sticker', title: 'Sticker', artist: 'NCT 127', art: ['#6B1E3A', '#270B16'] , cover: COVERS['sticker'] },
+  { id: 'istj', title: 'ISTJ', artist: 'NCT DREAM', art: ['#1E5A4A', '#0B241D'] , cover: COVERS['istj'] },
+  { id: 'candy', title: 'Candy', artist: 'NCT DREAM', art: ['#3A2B6B', '#140F27'] , cover: COVERS['candy'] },
 ];
 
 export const quickPicks = [
-  { id: 'bite-me', title: 'Bite Me', sub: 'ENHYPEN', art: ['#FF2D55', '#5E0F26'] },
-  { id: 'glitch', title: 'Glitch Mode', sub: 'NCT DREAM', art: ['#2B2F6B', '#101227'] },
-  { id: 'first-meet', title: '첫 만남은…', sub: 'TWS', art: ['#1E4A6B', '#0B1A27'] },
+  { id: 'bite-me', title: 'Bite Me', sub: 'ENHYPEN', art: ['#FF2D55', '#5E0F26'] , cover: COVERS['bite-me'] },
+  { id: 'glitch', title: 'Glitch Mode', sub: 'NCT DREAM', art: ['#2B2F6B', '#101227'] , cover: COVERS['glitch'] },
+  { id: 'first-meet', title: '첫 만남은…', sub: 'TWS', art: ['#1E4A6B', '#0B1A27'] , cover: COVERS['first-meet'] },
 ];
 
 export const musicVideos = [
   // duration은 목업용 임시값입니다 (실제 영상 길이를 확인하지 않았습니다)
-  { id: 'mv-bite', title: 'Bite Me', sub: 'ENHYPEN · 뮤직비디오', duration: '3:24', art: ['#FF2D55', '#5E0F26'] },
-  { id: 'mv-sticker', title: 'Sticker', sub: 'NCT 127 · 뮤직비디오', duration: '3:52', art: ['#6B1E3A', '#270B16'] },
+  { id: 'mv-bite', title: 'Bite Me', sub: 'ENHYPEN · 뮤직비디오', duration: '3:24', art: ['#FF2D55', '#5E0F26'] , cover: COVERS['mv-bite'] },
+  { id: 'mv-sticker', title: 'Sticker', sub: 'NCT 127 · 뮤직비디오', duration: '3:52', art: ['#6B1E3A', '#270B16'] , cover: COVERS['mv-sticker'] },
 ];
 
 /** 그라디언트 CSS 문자열로 변환 — 피그마의 대각선 그라디언트와 같은 각도 */
@@ -45,9 +75,9 @@ export const artStyle = ([from, to]) => ({
 
 /* ── 재생 대기열 ─────────────────────────────── */
 export const queue = [
-  { id: 'glitch', title: 'Glitch Mode', artist: 'NCT DREAM', art: ['#2B2F6B', '#101227'] },
-  { id: 'sticker', title: 'Sticker', artist: 'NCT 127', art: ['#6B1E3A', '#270B16'] },
-  { id: 'first-meet', title: '첫 만남은 계획대로 되지 않아', artist: 'TWS', art: ['#1E4A6B', '#0B1A27'] },
+  { id: 'glitch', title: 'Glitch Mode', artist: 'NCT DREAM', art: ['#2B2F6B', '#101227'] , cover: COVERS['glitch'] },
+  { id: 'sticker', title: 'Sticker', artist: 'NCT 127', art: ['#6B1E3A', '#270B16'] , cover: COVERS['sticker'] },
+  { id: 'first-meet', title: '첫 만남은 계획대로 되지 않아', artist: 'TWS', art: ['#1E4A6B', '#0B1A27'] , cover: COVERS['first-meet'] },
 ];
 
 /**
@@ -67,13 +97,13 @@ export const lyrics = {
 
 /* ── 보관함 ──────────────────────────────────── */
 export const savedTracks = [
-  { id: 'bite-me', title: 'Bite Me', artist: 'ENHYPEN', art: ['#FF2D55', '#5E0F26'] },
-  { id: 'glitch', title: 'Glitch Mode', artist: 'NCT DREAM', art: ['#2B2F6B', '#101227'] },
-  { id: 'sticker', title: 'Sticker', artist: 'NCT 127', art: ['#6B1E3A', '#270B16'] },
-  { id: 'first-meet', title: '첫 만남은 계획대로 되지 않아', artist: 'TWS', art: ['#1E5A4A', '#0B241D'] },
-  { id: 'istj', title: 'ISTJ', artist: 'NCT DREAM', art: ['#4A2B6B', '#1A0F27'] },
-  { id: 'sn', title: '내가 S면 넌 나의 N이 되어줘', artist: 'TWS', art: ['#6B3A1E', '#241108'] },
-  { id: 'candy', title: 'Candy', artist: 'NCT DREAM', art: ['#1E4A6B', '#0B1A27'] },
+  { id: 'bite-me', title: 'Bite Me', artist: 'ENHYPEN', art: ['#FF2D55', '#5E0F26'] , cover: COVERS['bite-me'] },
+  { id: 'glitch', title: 'Glitch Mode', artist: 'NCT DREAM', art: ['#2B2F6B', '#101227'] , cover: COVERS['glitch'] },
+  { id: 'sticker', title: 'Sticker', artist: 'NCT 127', art: ['#6B1E3A', '#270B16'] , cover: COVERS['sticker'] },
+  { id: 'first-meet', title: '첫 만남은 계획대로 되지 않아', artist: 'TWS', art: ['#1E5A4A', '#0B241D'] , cover: COVERS['first-meet'] },
+  { id: 'istj', title: 'ISTJ', artist: 'NCT DREAM', art: ['#4A2B6B', '#1A0F27'] , cover: COVERS['istj'] },
+  { id: 'sn', title: '내가 S면 넌 나의 N이 되어줘', artist: 'TWS', art: ['#6B3A1E', '#241108'] , cover: COVERS['sn'] },
+  { id: 'candy', title: 'Candy', artist: 'NCT DREAM', art: ['#1E4A6B', '#0B1A27'] , cover: COVERS['candy'] },
 ];
 
 export const libraryFilters = ['전체', '플레이리스트', '앨범', '아티스트'];

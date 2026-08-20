@@ -86,8 +86,13 @@ export default function PortfolioNotice() {
               <strong className="font-semibold text-primary">개인 포트폴리오 작품</strong>입니다.
             </p>
             <p>
-              실제 음악은 재생되지 않으며, 화면의 곡·앨범 정보는 모두 목업 데이터입니다. 앨범 아트는 저작권 문제를
-              피하기 위해 그라디언트로 대체했고, 가사도 실제 가사가 아닌 예시 문장입니다.
+              실제 음악은 재생되지 않으며, 화면의 곡·앨범 정보는 모두 목업 데이터입니다. 가사도 실제 가사가 아닌
+              예시 문장입니다.
+            </p>
+            <p>
+              <strong className="font-semibold text-primary">앨범 자켓 이미지의 저작권은 각 아티스트와 음반사에
+              있습니다.</strong>{' '}
+              화면 구현을 보여주기 위한 목적으로만 표시하며, 권리자의 요청이 있으면 즉시 내리겠습니다.
             </p>
             <p>수집하거나 저장하는 개인정보는 없습니다.</p>
           </div>
