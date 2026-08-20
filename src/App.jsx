@@ -17,14 +17,21 @@ function Shell() {
   // 라우터 대신 상태 하나로 탭을 전환합니다.
   // 화면을 갈아끼워도 MiniPlayer / TabBar 는 <main> 바깥에 있어 언마운트되지 않습니다.
   const [tab, setTab] = useState('home');
-  const { expanded } = usePlayer();
+  const { expanded, closePlayer } = usePlayer();
   const Page = PAGES[tab];
+
+  const handleTabChange = (nextTab) => {
+    setTab(nextTab);
+    if (expanded) {
+      closePlayer();
+    }
+  };
 
   return (
     // 모바일: 480px 한 칸. 데스크톱(lg): 폭 제한을 풀고 사이드바가 들어옵니다.
     <div className="mx-auto flex h-dvh w-full max-w-[480px] flex-col overflow-hidden bg-base lg:max-w-none">
       <div className="flex min-h-0 flex-1">
-        <Sidebar active={tab} onChange={setTab} />
+        <Sidebar active={tab} onChange={handleTabChange} />
 
         {/*
           min-w-0 이 없으면 안쪽 가로 캐러셀의 최소 너비 때문에 이 컬럼이 화면 밖으로 밀려납니다.
@@ -49,7 +56,7 @@ function Shell() {
 
       {/* 아래 두 줄은 탭이 바뀌어도 다시 그려지지 않습니다 — 재생 맥락이 끊기지 않는 이유 */}
       <MiniPlayer />
-      <TabBar active={tab} onChange={setTab} />
+      <TabBar active={tab} onChange={handleTabChange} />
     </div>
   );
 }
