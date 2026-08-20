@@ -4,14 +4,15 @@ import Icon from './Icon';
 /**
  * 가로 스크롤 줄.
  *
- * 좌우에 화살표를 띄워 "옆에 더 있다"를 눈에 보이게 합니다.
- * 끝에 닿으면 그쪽 화살표는 사라지므로, 화살표 자체가 남은 양을 알려주는 표시가 됩니다.
- * 스크롤·리사이즈·자식 변경을 모두 감지해야 화살표 상태가 어긋나지 않습니다.
+ * - 좌우 화살표: 끝에 닿으면 그쪽이 사라져, 화살표 자체가 남은 양을 알려주는 표시가 됩니다.
+ * - 마우스 드래그: PC 에서는 휠로 가로 스크롤이 안 되므로 잡아끌 수 있게 했습니다.
+ *   터치는 브라우저 기본 스크롤이 관성까지 있어 더 자연스러우므로 가로채지 않습니다.
  */
 export default function Carousel({ children }) {
   const ref = useRef(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(true);
+  const [dragging, setDragging] = useState(false);
 
   const sync = useCallback(() => {
     const el = ref.current;
@@ -38,9 +39,55 @@ export default function Carousel({ children }) {
     el?.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' });
   };
 
+  /* ── 마우스 드래그 스크롤 ─────────────────── */
+  const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false });
+
+  const onPointerDown = (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    const el = ref.current;
+    drag.current = { active: true, startX: e.clientX, startLeft: el.scrollLeft, moved: false };
+    el.setPointerCapture(e.pointerId);
+    setDragging(true);
+  };
+
+  const onPointerMove = (e) => {
+    const d = drag.current;
+    if (!d.active) return;
+    const dx = e.clientX - d.startX;
+    if (Math.abs(dx) > 4) d.moved = true; // 4px 넘게 움직였으면 클릭이 아니라 드래그로 봅니다
+    ref.current.scrollLeft = d.startLeft - dx;
+  };
+
+  const endDrag = (e) => {
+    if (!drag.current.active) return;
+    drag.current.active = false;
+    setDragging(false);
+    ref.current?.releasePointerCapture?.(e.pointerId);
+  };
+
+  // 드래그로 끝났다면 카드의 클릭(재생)이 실행되지 않도록 막습니다
+  const onClickCapture = (e) => {
+    if (drag.current.moved) {
+      e.stopPropagation();
+      e.preventDefault();
+      drag.current.moved = false;
+    }
+  };
+
   return (
     <div className="relative">
-      <div ref={ref} onScroll={sync} className="no-scrollbar flex gap-2 overflow-x-auto px-5 pb-1 lg:px-8">
+      <div
+        ref={ref}
+        onScroll={sync}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onClickCapture={onClickCapture}
+        className={`no-scrollbar flex gap-2 overflow-x-auto px-5 pb-1 lg:px-8 ${
+          dragging ? 'cursor-grabbing select-none' : 'cursor-grab'
+        }`}
+      >
         {children}
       </div>
 
