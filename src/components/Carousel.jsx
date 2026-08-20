@@ -39,59 +39,58 @@ export default function Carousel({ children }) {
     el?.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' });
   };
 
-  /* ── 마우스 드래그 스크롤 ─────────────────── */
-  const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false, pointerId: null });
+  /* ── 마우스 드래그 스크롤 (클릭 방해 없는 안전한 구현) ── */
+  const dragInfo = useRef({
+    isDown: false,
+    startX: 0,
+    scrollLeft: 0,
+    hasDragged: false,
+  });
 
-  const onPointerDown = (e) => {
-    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+  const onMouseDown = (e) => {
+    if (e.button !== 0) return;
     const el = ref.current;
-    drag.current = {
-      active: true,
+    if (!el) return;
+    dragInfo.current = {
+      isDown: true,
       startX: e.clientX,
-      startLeft: el?.scrollLeft || 0,
-      moved: false,
-      pointerId: e.pointerId,
+      scrollLeft: el.scrollLeft,
+      hasDragged: false,
     };
   };
 
-  const onPointerMove = (e) => {
-    const d = drag.current;
-    if (!d.active) return;
+  const onMouseMove = (e) => {
+    const d = dragInfo.current;
+    if (!d.isDown) return;
+    const el = ref.current;
+    if (!el) return;
     const dx = e.clientX - d.startX;
-    if (Math.abs(dx) > 4) {
-      if (!d.moved) {
-        d.moved = true;
-        setDragging(true);
-        try {
-          ref.current?.setPointerCapture?.(e.pointerId);
-        } catch {
-          /* noop */
-        }
-      }
-      if (ref.current) {
-        ref.current.scrollLeft = d.startLeft - dx;
-      }
+    // 8px 이상 마우스를 끌었을 때만 드래그로 판정
+    if (Math.abs(dx) > 8) {
+      d.hasDragged = true;
+      setDragging(true);
+      el.scrollLeft = d.scrollLeft - dx;
     }
   };
 
-  const endDrag = (e) => {
-    const d = drag.current;
-    if (!d.active) return;
-    d.active = false;
+  const onMouseUp = () => {
+    const d = dragInfo.current;
+    d.isDown = false;
     setDragging(false);
-    try {
-      ref.current?.releasePointerCapture?.(e.pointerId);
-    } catch {
-      /* noop */
-    }
   };
 
-  // 드래그로 끝났다면 카드의 클릭(재생)이 실행되지 않도록 막습니다
+  const onMouseLeave = () => {
+    const d = dragInfo.current;
+    d.isDown = false;
+    setDragging(false);
+  };
+
+  // 실제로 드래그(8px 초과)했을 때만 카드의 클릭 이벤트를 막습니다
   const onClickCapture = (e) => {
-    if (drag.current.moved) {
+    if (dragInfo.current.hasDragged) {
       e.stopPropagation();
       e.preventDefault();
-      drag.current.moved = false;
+      dragInfo.current.hasDragged = false;
     }
   };
 
@@ -100,13 +99,13 @@ export default function Carousel({ children }) {
       <div
         ref={ref}
         onScroll={sync}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseLeave}
         onClickCapture={onClickCapture}
         className={`no-scrollbar flex gap-2 overflow-x-auto px-5 pb-1 lg:px-8 ${
-          dragging ? 'cursor-grabbing select-none' : 'cursor-grab'
+          dragging ? 'cursor-grabbing select-none' : ''
         }`}
       >
         {children}

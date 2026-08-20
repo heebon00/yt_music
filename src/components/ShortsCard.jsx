@@ -10,7 +10,7 @@ export default function ShortsCard({ item, onPlay }) {
     <button
       type="button"
       onClick={() => onPlay?.(item)}
-      className="group relative aspect-[118/210] w-[118px] shrink-0 lg:w-[150px] overflow-hidden rounded-xl text-left"
+      className="group relative aspect-[118/210] w-[118px] shrink-0 lg:w-[150px] overflow-hidden rounded-xl text-left cursor-pointer transition-transform active:scale-[0.98]"
       style={artStyle(item.art)}
     >
       {item.cover && !failed && (

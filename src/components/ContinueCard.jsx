@@ -8,17 +8,23 @@ import { usePlayer } from '../store/playerContext';
  */
 export default function ContinueCard() {
   // 미니 플레이어와 같은 소스를 봅니다. 어느 화면에서 곡을 눌러도 둘이 함께 바뀝니다.
-  const { track, isPlaying, progress, toggle } = usePlayer();
+  const { track, isPlaying, progress, toggle, openPlayer } = usePlayer();
 
   return (
     <div className="relative mx-5 overflow-hidden rounded-card bg-elevated lg:mx-8">
       <div className="flex items-center gap-4 p-3">
-        <Cover item={track} className="size-16 shrink-0 rounded-art" />
-        <div className="min-w-0 flex-1">
-          <p className="text-[10px] font-semibold tracking-[0.08em] text-accent-bright">이어듣기</p>
-          <p className="mt-0.5 truncate text-[17px] font-semibold tracking-tight">{track.title}</p>
-          <p className="mt-1 truncate text-[13px] text-secondary">{track.artist}</p>
-        </div>
+        <button
+          type="button"
+          onClick={openPlayer}
+          className="flex min-w-0 flex-1 items-center gap-4 text-left cursor-pointer transition-opacity hover:opacity-90"
+        >
+          <Cover item={track} className="size-16 shrink-0 rounded-art" />
+          <div className="min-w-0 flex-1">
+            <p className="text-[10px] font-semibold tracking-[0.08em] text-accent-bright">이어듣기</p>
+            <p className="mt-0.5 truncate text-[17px] font-semibold tracking-tight">{track.title}</p>
+            <p className="mt-1 truncate text-[13px] text-secondary">{track.artist}</p>
+          </div>
+        </button>
         <button
           type="button"
           onClick={toggle}
