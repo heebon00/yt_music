@@ -10,13 +10,8 @@ import { usePlayer } from '../store/playerContext';
 
 /** 가로 스크롤 줄 — 모든 캐러셀이 이걸 씁니다. 좌우 여백 20px을 안쪽 패딩으로 줘서 첫 카드가 화면 끝에 붙지 않게 합니다. */
 function Row({ children }) {
-  return (
-    <div className="no-scrollbar flex gap-2 overflow-x-auto px-5 pb-1 lg:px-8">
-      {children}
-      {/* 스크롤 컨테이너의 padding-right 를 무시하는 브라우저가 있어, 끝에 여백용 스페이서를 둡니다 */}
-      <span aria-hidden="true" className="w-1 shrink-0" />
-    </div>
-  );
+  // 좌우 여백 20px 을 안쪽 패딩으로 줍니다. 끝까지 밀면 오른쪽에도 같은 여백이 남습니다.
+  return <div className="no-scrollbar flex gap-2 overflow-x-auto px-5 pb-1 lg:px-8">{children}</div>;
 }
 
 export default function Home() {
