@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+/* ─────────────────────────────────────────────
+   디자인 토큰 — 피그마 `YTM Color` 변수와 1:1
+   @theme 에 넣으면 bg-base / text-secondary 처럼
+   Tailwind 유틸리티로 바로 쓸 수 있습니다.
+   ───────────────────────────────────────────── */
+@theme {
+  --color-base: #0b0b0c;
+  --color-surface: #17171a;
+  --color-elevated: #1f1f24;
+  --color-line: #2a2a30;
+
+  --color-primary: #f1f1f1;
+  --color-secondary: #9a9aa2;
+  --color-disabled: #6a6a72;
+
+  --color-accent: #ff2d55;
+  --color-accent-dim: #3a121f;
+
+  --font-sans: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+
+  --radius-card: 14px;
+  --radius-art: 10px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-base);
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 가로 캐러셀: 스크롤바는 숨기고 스와이프는 살립니다 */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
