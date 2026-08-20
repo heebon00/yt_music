@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SplashScreen from './components/SplashScreen';
 import PortfolioNotice from './components/PortfolioNotice';
 import Sidebar from './components/Sidebar';
 import TabBar from './components/TabBar';
@@ -64,6 +65,7 @@ function Shell() {
 export default function App() {
   return (
     <PlayerProvider>
+      <SplashScreen />
       <PortfolioNotice />
       <Shell />
     </PlayerProvider>

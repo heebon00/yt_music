@@ -108,3 +108,17 @@ body {
     animation: none;
   }
 }
+
+@keyframes splash-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0px rgba(207, 3, 42, 0));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 28px rgba(251, 4, 51, 0.45));
+  }
+}
+.animate-splash-logo {
+  animation: splash-pulse 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
