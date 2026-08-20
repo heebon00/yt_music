@@ -14,6 +14,9 @@ import { viteSingleFile } from 'vite-plugin-singlefile'
 export default defineConfig(({ mode }) => {
   const single = mode === 'singlefile'
   return {
+    // 상대 경로로 빌드합니다. Vercel(루트)과 GitHub Pages(/저장소명/) 양쪽에서
+    // 저장소 이름을 몰라도 그대로 동작합니다.
+    base: './',
     plugins: [react(), tailwindcss(), ...(single ? [viteSingleFile()] : [])],
     build: single
       ? { outDir: 'dist-single', cssCodeSplit: false, assetsInlineLimit: 100_000_000 }

@@ -11,9 +11,9 @@ export default function Search() {
 
   return (
     <div className="pb-8">
-      <h1 className="px-5 pt-5 pb-4 text-2xl font-bold tracking-tight">검색</h1>
+      <h1 className="px-5 lg:px-8 pt-5 pb-4 text-2xl font-bold tracking-tight">검색</h1>
 
-      <div className="px-5">
+      <div className="px-5 lg:px-8">
         <button
           type="button"
           className="flex h-11.5 w-full items-center gap-3 rounded-full border border-line bg-surface px-4 text-left
@@ -25,13 +25,13 @@ export default function Search() {
       </div>
 
       <section className="pt-8">
-        <div className="mb-3 flex items-baseline justify-between px-5">
+        <div className="mb-3 flex items-baseline justify-between px-5 lg:px-8">
           <h2 className="text-[15px] font-semibold">최근 검색어</h2>
           <button type="button" className="text-xs text-secondary hover:text-primary">
             지우기
           </button>
         </div>
-        <div className="flex flex-wrap gap-2 px-5">
+        <div className="flex flex-wrap gap-2 px-5 lg:px-8">
           {recentQueries.map((q) => (
             <button
               key={q}
@@ -46,8 +46,8 @@ export default function Search() {
       </section>
 
       <section className="pt-8">
-        <h2 className="mb-3.5 px-5 text-[15px] font-semibold">장르 둘러보기</h2>
-        <div className="grid grid-cols-2 gap-3 px-5">
+        <h2 className="mb-3.5 px-5 lg:px-8 text-[15px] font-semibold">장르 둘러보기</h2>
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4 px-5 lg:px-8">
           {genres.map((g) => (
             <button
               key={g.id}

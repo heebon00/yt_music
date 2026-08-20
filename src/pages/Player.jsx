@@ -16,7 +16,8 @@ export default function Player() {
   const { track, isPlaying, liked, progress, toggle, seek, setLiked, closePlayer } = usePlayer();
 
   return (
-    <div className="animate-sheet-up flex h-full flex-col overflow-y-auto bg-base">
+    <div className="animate-sheet-up h-full overflow-y-auto bg-base">
+      <div className="mx-auto flex w-full max-w-[560px] flex-col pb-2">
       <div className="flex items-center justify-between px-4 pt-4">
         <button type="button" onClick={closePlayer} aria-label="닫기" className="text-primary hover:text-secondary">
           <Icon name="down" size={26} />
@@ -124,6 +125,7 @@ export default function Player() {
             </li>
           ))}
         </ul>
+      </div>
       </div>
     </div>
   );

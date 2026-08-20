@@ -1,21 +1,15 @@
 import Icon from './Icon';
+import { NAV } from '../data/nav';
 
-/** 하단 탭 4개. 재생목록은 요청대로 보관함 왼쪽입니다. */
-const TABS = [
-  { id: 'home', label: '홈', icon: 'home' },
-  { id: 'search', label: '검색', icon: 'search' },
-  { id: 'playlist', label: '재생목록', icon: 'playlist' },
-  { id: 'library', label: '보관함', icon: 'library' },
-];
-
+/** 하단 탭바 — 모바일 · 태블릿 전용. 데스크톱에서는 사이드바가 대신합니다. */
 export default function TabBar({ active, onChange }) {
   return (
     <nav
-      className="border-t border-line bg-surface"
+      className="shrink-0 border-t border-line bg-surface lg:hidden"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <ul className="flex h-14">
-        {TABS.map((tab) => {
+        {NAV.map((tab) => {
           const on = tab.id === active;
           return (
             <li key={tab.id} className="flex-1">

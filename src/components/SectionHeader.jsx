@@ -1,7 +1,7 @@
 /** 섹션 제목 + 우측 '전체 보기' — 홈의 모든 섹션이 이 한 줄을 씁니다 */
 export default function SectionHeader({ title, action = '전체 보기', onAction }) {
   return (
-    <div className="mb-3.5 flex items-baseline justify-between px-5">
+    <div className="mb-3.5 flex items-baseline justify-between px-5 lg:px-8">
       <h2 className="text-[15px] font-semibold tracking-tight">{title}</h2>
       {action && (
         <button

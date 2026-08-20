@@ -7,7 +7,7 @@ import { artStyle } from '../data/mock';
  */
 export default function ContinueCard({ track, isPlaying, onToggle }) {
   return (
-    <div className="relative mx-5 overflow-hidden rounded-card bg-elevated">
+    <div className="relative mx-5 overflow-hidden rounded-card bg-elevated lg:mx-8">
       <div className="flex items-center gap-4 p-3">
         <div className="size-16 shrink-0 rounded-art" style={artStyle(track.art)} />
         <div className="min-w-0 flex-1">

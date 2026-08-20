@@ -6,7 +6,7 @@ export default function ShortsCard({ item, onPlay }) {
     <button
       type="button"
       onClick={() => onPlay?.(item)}
-      className="group relative aspect-[118/210] w-[118px] shrink-0 overflow-hidden rounded-xl text-left"
+      className="group relative aspect-[118/210] w-[118px] shrink-0 lg:w-[150px] overflow-hidden rounded-xl text-left"
       style={artStyle(item.art)}
     >
       <span className="absolute top-2.5 left-2.5 rounded-md bg-black/55 px-2 py-1 text-[9px] font-semibold tracking-widest text-white">

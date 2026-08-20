@@ -9,7 +9,7 @@ import { usePlayer } from '../store/playerContext';
 
 /** 가로 스크롤 줄 — 모든 캐러셀이 이걸 씁니다. 좌우 여백 20px을 안쪽 패딩으로 줘서 첫 카드가 화면 끝에 붙지 않게 합니다. */
 function Row({ children }) {
-  return <div className="no-scrollbar flex gap-2 overflow-x-auto px-5 pb-1">{children}</div>;
+  return <div className="no-scrollbar flex gap-2 overflow-x-auto px-5 lg:px-8 pb-1">{children}</div>;
 }
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="pb-8">
-      <header className="flex items-start justify-between px-5 pt-5 pb-6">
+      <header className="flex items-start justify-between px-5 lg:px-8 pt-5 pb-6">
         <div>
           <p className="text-[10px] font-medium tracking-[0.1em] text-secondary">MONDAY EVENING</p>
           <h1 className="mt-1 text-2xl font-bold tracking-tight">이어서 들을까요?</h1>

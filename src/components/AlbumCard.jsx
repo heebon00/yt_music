@@ -10,7 +10,7 @@ export default function AlbumCard({ item, onPlay }) {
     <button
       type="button"
       onClick={() => onPlay?.(item)}
-      className="group w-31 shrink-0 text-left"
+      className="group w-31 shrink-0 text-left lg:w-40"
     >
       <div className="relative aspect-square w-full overflow-hidden rounded-art" style={artStyle(item.art)}>
         {/* hover 시에만 나타나는 어둠막 + 재생 버튼 */}

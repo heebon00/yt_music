@@ -15,7 +15,7 @@ export default function Library() {
 
   return (
     <div className="pb-8">
-      <div className="flex items-center justify-between px-5 pt-5 pb-4">
+      <div className="flex items-center justify-between px-5 lg:px-8 pt-5 pb-4">
         <h1 className="text-2xl font-bold tracking-tight">보관함</h1>
         <div className="flex items-center gap-3">
           <button type="button" aria-label="검색" className="text-primary hover:text-secondary">
@@ -28,7 +28,7 @@ export default function Library() {
       </div>
 
       {/* 세그먼트 — 라우팅 없이 이 상태 하나로 갈립니다 */}
-      <div className="mx-5 grid grid-cols-2 rounded-full bg-surface p-1">
+      <div className="mx-5 lg:mx-8 grid grid-cols-2 rounded-full bg-surface p-1">
         {[
           ['library', '보관함'],
           ['explore', '둘러보기'],
@@ -49,7 +49,7 @@ export default function Library() {
 
       {segment === 'library' ? (
         <>
-          <div className="no-scrollbar mt-5 flex gap-2 overflow-x-auto px-5">
+          <div className="no-scrollbar mt-5 flex gap-2 overflow-x-auto px-5 lg:px-8">
             {libraryFilters.map((f) => (
               <button
                 key={f}
@@ -66,7 +66,7 @@ export default function Library() {
             ))}
           </div>
 
-          <div className="mt-5 flex items-center justify-between px-5">
+          <div className="mt-5 flex items-center justify-between px-5 lg:px-8">
             <button type="button" className="flex items-center gap-1 text-xs text-secondary hover:text-primary">
               최근 추가순
               <Icon name="down" size={14} />
@@ -83,7 +83,7 @@ export default function Library() {
           </div>
         </>
       ) : (
-        <div className="mt-6 grid grid-cols-2 gap-3 px-5">
+        <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4 px-5 lg:px-8">
           {genres.map((g) => (
             <button
               key={g.id}

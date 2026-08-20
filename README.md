@@ -1,16 +1,182 @@
-# React + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+# YouTube Music Redesign
 
-Currently, two official plugins are available:
+### 듣는 동안, 화면을 떠나지 않게.
+찾는 시간을 줄이고, 듣는 시간을 늘린다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**[🔗 배포된 웹](https://TODO)** · **[🎨 Figma 프로토타입](https://www.figma.com/proto/0OKoegX3OBJMciNeO2rdgS/?node-id=17-2&starting-point-node-id=17-2)** · **[📑 디자인 덱](https://www.figma.com/design/0OKoegX3OBJMciNeO2rdgS/)**
 
-## React Compiler
+4일 개인 프로젝트 · 기획 · UX/UI 디자인 · 프론트엔드 퍼블리싱
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+</div>
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 무엇을 만들었나
+
+유튜브 뮤직 모바일 웹의 **탐색·재생 경험을 다시 설계하고 실제 동작하는 웹으로 구현**했습니다.
+피그마 디자인만 그린 게 아니라, 같은 결과물을 React로 퍼블리싱해 링크로 열어볼 수 있게 만들었습니다.
+
+| | |
+| :-- | :-- |
+| 기간 | 4일 |
+| 역할 | 1인 (문제 정의 → 디자인 → 퍼블리싱 → 배포) |
+| 화면 | 5종 (홈 · 플레이어 · 보관함 · 검색 · 재생목록) |
+| 컴포넌트 | 피그마 7종 / React 11종 |
+
+---
+
+## 1. 문제 정의
+
+기존 유튜브 뮤직을 쓰며 반복적으로 걸린 지점 세 가지입니다.
+
+| | 문제 | 무슨 일이 일어나나 |
+| :-- | :-- | :-- |
+| 01 | **보관함 접근성** | 저장한 음악을 보려면 열어둔 플레이어를 닫고 상위 메뉴로 돌아가야 한다 |
+| 02 | **대기열 UI** | 가사 · 대기열 · 관련 항목이 탭으로 나뉘어 한 번에 하나만 볼 수 있다 |
+| 03 | **가사 가독성** | 가사를 켜면 다음 곡 정보가 가려져, 확인할 때마다 탭을 오간다 |
+
+세 문제의 공통점은 하나였습니다.
+
+> **재생은 이어지는데 보고 있던 화면은 계속 사라진다.**
+> 이동할 때마다 맥락이 끊기는 구조.
+
+그래서 해법도 하나로 묶었습니다 — **탐색은 앞으로 당기고, 재생 중 필요한 정보는 플레이어 안으로.**
+
+---
+
+## 2. 이렇게 바꿨습니다
+
+### 홈 — 앱을 열자마자 재생까지 1탭
+
+첫 화면 최상단에 **이어듣기 카드**를 뒀습니다. 마지막으로 듣던 지점이 카드 하단의 얇은 라인으로 보이고,
+버튼 하나로 그대로 이어집니다. "무엇을 들을지 고르는" 단계 자체를 건너뜁니다.
+
+아래로는 나의 재생목록 · Shorts에서 들은 음악 · 빠른 선곡 · 맞춤 추천 뮤직비디오가
+**전부 가로 스크롤**로 이어집니다. 더보기 화면으로 빠져나갈 일이 없습니다.
+
+### 플레이어 — 가사와 대기열을 한 화면에
+
+앨범아트를 **108px로 줄인 대신**, 남은 공간을 가사와 대기열에 나눠줬습니다.
+원본처럼 두 정보를 탭으로 가르지 않기 때문에, 가사를 보다가 다음 곡을 확인하는 이동이 사라집니다.
+
+그리고 **확장 플레이어에서도 하단 탭바를 숨기지 않았습니다.** 이게 이 리디자인의 핵심 주장입니다.
+플레이어를 연 채로 보관함에 갈 수 있고, 돌아오면 보던 화면이 스크롤 위치까지 그대로입니다.
+
+### 보관함 — 세그먼트 하나로 라우팅 제거
+
+보관함과 둘러보기를 **같은 화면의 세그먼트**로 합쳤습니다.
+화면을 바꾸지 않고 목록만 갈아끼우기 때문에 뒤로 돌아올 이동이 아예 생기지 않습니다.
+
+### 하단 탭 — 재생목록 추가
+
+`홈 · 검색 · 재생목록 · 보관함`. **재생목록 탭을 새로 넣었습니다.**
+"방금 듣던 것으로 돌아가기"가 가장 잦은 행동인데 기존에는 진입점이 없었습니다.
+탭이 하나 늘었지만, 되돌아가는 이동을 없애므로 전체 depth는 줄어듭니다.
+
+> 📌 **스크린샷 / GIF를 여기에 넣으세요**
+> 넣을 것: ① 홈 스크롤 ② 미니 플레이어 → 확장 ③ 탭 전환 시 플레이어 유지 ④ 데스크톱 사이드바
+
+---
+
+## 3. 디자인 시스템
+
+피그마 로컬 변수(`YTM Color`)와 CSS 토큰이 **이름·값 1:1**입니다. 코드에 색상 하드코딩이 없습니다.
+
+```css
+@theme {
+  --color-base: #0b0b0c;      --color-primary: #f1f1f1;
+  --color-surface: #17171a;   --color-secondary: #9a9aa2;
+  --color-elevated: #1f1f24;  --color-disabled: #6a6a72;
+  --color-line: #2a2a30;      --color-accent: #ff2d55;
+}
+```
+
+- **타이포** Pretendard — Display 24 Bold / Title 20 SemiBold / Body 15 Medium / Caption 11 Medium
+- **아이콘** 24px 그리드 16종 (피그마 variants ↔ React `<Icon name="…" />` 동일 패스)
+- **아트워크** 저작권 있는 앨범 커버 대신 **그라디언트**로 표현. 디자인 단계부터 그렇게 잡았습니다
+
+---
+
+## 4. 기술 스택과 선정 이유
+
+| 스택 | 왜 |
+| :-- | :-- |
+| **React 19 + Vite 8** | 컴포넌트 단위로 화면을 조립하고, 핫리로드가 빨라 반복 수정에 유리 |
+| **Tailwind CSS 4** | 디자인 → 코드 전환 속도. `@theme`으로 피그마 변수를 그대로 이관 |
+| **Context API** | 재생 상태를 전역 공유. 라이브러리를 더 붙일 만큼 상태가 복잡하지 않음 |
+| **라우터 없음** | 탭 전환을 상태로 처리. 그래야 플레이어가 언마운트되지 않음 |
+
+### 구현에서 가장 중요한 부분
+
+```jsx
+<div className="flex h-dvh flex-col">
+  <div className="flex flex-1">
+    <Sidebar />                      {/* 데스크톱 */}
+    <main>{현재 탭}</main>            {/* 여기만 바뀝니다 */}
+  </div>
+  <MiniPlayer />                     {/* 탭이 바뀌어도 다시 그려지지 않음 */}
+  <TabBar />                         {/* 모바일 */}
+</div>
+```
+
+라우터로 페이지를 갈아끼우면 하단 바까지 다시 그려집니다.
+탭을 상태로 처리하고 플레이어를 `<main>` **바깥**에 두었기 때문에 재생 맥락이 끊기지 않습니다.
+**디자인에서 주장한 내용을 구조로 지킨 부분**입니다.
+
+---
+
+## 5. 실행 방법
+
+```bash
+npm install
+npm run dev          # 개발 서버
+npm run build        # 배포용 빌드 (dist/)
+npm run build:file   # 더블클릭으로 열리는 단일 HTML (dist-single/)
+npm run lint
+```
+
+```
+src/
+├── components/   Icon · Sidebar · TabBar · MiniPlayer · ProgressBar
+│                 ContinueCard · AlbumCard · ShortsCard · VideoCard · TrackRow · SectionHeader
+├── pages/        Home · Search · Playlist · Library · Player
+├── store/        playerContext.js (훅) · PlayerProvider.jsx (전역 재생 상태)
+├── data/         mock.js (정적 목업) · nav.js
+└── index.css     Tailwind import + 디자인 토큰
+```
+
+---
+
+## 6. 회고
+
+> ✏️ **초안입니다.** 실제로 느낀 내용으로 다듬어 쓰세요.
+
+**컨셉 한 줄을 먼저 못 박은 게 컸다.**
+"듣는 동안, 화면을 떠나지 않게"를 정하고 나니 이후 모든 판단이 빨라졌습니다.
+탭을 하나 더 넣을지, 앨범아트를 얼마나 줄일지 같은 결정이 취향 싸움이 아니라
+"이게 이동을 줄이나?"라는 한 가지 질문으로 정리됐습니다.
+
+**디자인의 주장을 코드 구조가 못 지키면 의미가 없다.**
+"플레이어가 사라지지 않는다"고 디자인해놓고 라우터로 페이지를 갈아끼웠다면
+매번 다시 그려졌을 겁니다. 컴포넌트를 어디에 두느냐가 곧 UX였습니다.
+
+**넣지 않기로 한 것도 결정이었다.**
+실제 오디오 재생, 검색 결과 화면은 넣지 않았습니다.
+4일 안에 다 넣으면 정작 봐야 할 화면 완성도가 떨어집니다.
+
+**다음에 다르게 할 것**
+- 문제 정의를 내 경험만이 아니라 다른 사용자에게도 확인해볼 것
+- 데스크톱 레이아웃을 나중이 아니라 처음부터 같이 그릴 것
+
+---
+
+## 아직 목업인 것
+
+솔직하게 적어둡니다.
+
+- **오디오가 실제로 재생되지 않습니다.** 진행률은 드래그로만 움직입니다
+- 이전/다음 곡 버튼은 대기열을 넘기지 않습니다
+- 뮤직비디오 재생시간은 목업 값입니다 (`src/data/mock.js`에 주석 표시)
+- 가사는 저작권 문제를 피하려고 **실제 가사가 아닌 예시 문장**입니다
