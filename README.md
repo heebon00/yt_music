@@ -5,7 +5,7 @@
 ### 듣는 동안, 화면을 떠나지 않게.
 찾는 시간을 줄이고, 듣는 시간을 늘린다.
 
-**[🔗 배포된 웹](https://heebon00.github.io/yt_music/)** · **[🎨 Figma 프로토타입](https://www.figma.com/proto/0OKoegX3OBJMciNeO2rdgS/?node-id=17-2&starting-point-node-id=17-2)** · **[📑 디자인 덱](https://www.figma.com/design/0OKoegX3OBJMciNeO2rdgS/)**
+**[🔗 배포된 웹](https://heebon00.github.io/yt_music/)** · **[🎨 Figma 프로토타입](https://www.figma.com/proto/0OKoegX3OBJMciNeO2rdgS/?node-id=120-1777&starting-point-node-id=120-1777)** · **[📑 디자인 덱](https://www.figma.com/design/0OKoegX3OBJMciNeO2rdgS/)**
 
 4일 개인 프로젝트 · 기획 · UX/UI 디자인 · 프론트엔드 퍼블리싱
 
