@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Icon from './Icon';
 
+// 이 거리를 넘게 끌어야 클릭이 아니라 드래그로 봅니다
+const DRAG_THRESHOLD = 8;
+
 /**
  * 가로 스크롤 줄.
  *
@@ -65,11 +68,11 @@ export default function Carousel({ children }) {
     const el = ref.current;
     if (!el) return;
     const dx = e.clientX - d.startX;
-    // 8px 이상 마우스를 끌었을 때만 드래그로 판정
-    if (Math.abs(dx) > 8) {
+    if (Math.abs(dx) > DRAG_THRESHOLD) {
       d.hasDragged = true;
       setDragging(true);
-      el.scrollLeft = d.scrollLeft - dx;
+      // 임계값만큼 빼주지 않으면 드래그가 시작되는 순간 그 거리만큼 툭 튑니다
+      el.scrollLeft = d.scrollLeft - (dx - Math.sign(dx) * DRAG_THRESHOLD);
     }
   };
 
@@ -82,10 +85,13 @@ export default function Carousel({ children }) {
   const onMouseLeave = () => {
     const d = dragInfo.current;
     d.isDown = false;
+    // 캐러셀 밖에서 버튼을 놓으면 click 이 여기로 오지 않아 onClickCapture 가 실행되지 않습니다.
+    // 플래그를 남겨두면 다음번 "그냥 클릭" 한 번을 삼켜버리므로 여기서 함께 지웁니다.
+    d.hasDragged = false;
     setDragging(false);
   };
 
-  // 실제로 드래그(8px 초과)했을 때만 카드의 클릭 이벤트를 막습니다
+  // 실제로 드래그했을 때만 카드의 클릭 이벤트를 막습니다
   const onClickCapture = (e) => {
     if (dragInfo.current.hasDragged) {
       e.stopPropagation();

@@ -1,14 +1,37 @@
 import { useEffect, useState } from 'react';
 
+const STORAGE_KEY = 'ytm_splash_seen';
+
+/** 이번 세션에서 이미 봤는지 — 첫 렌더에서 한 번만 읽습니다 */
+function shouldShow() {
+  try {
+    return sessionStorage.getItem(STORAGE_KEY) !== '1';
+  } catch {
+    return true; // 시크릿 모드 등 sessionStorage 차단 환경에서는 그냥 띄웁니다
+  }
+}
+
 /**
  * 모바일 첫 진입 시 나타나는 미니멀 스플래시 로딩 화면
  * 중앙에 리디자인 원형 로고가 부드럽게 나타나며 은은한 펄스 효과를 보여준 뒤 페이드아웃됩니다.
+ *
+ * 탭 세션당 한 번만 띄웁니다. 새로고침할 때마다 1.4초를 기다리게 하면
+ * 포트폴리오를 훑어보는 사람에게는 브랜딩이 아니라 방해가 됩니다.
  */
 export default function SplashScreen() {
-  const [show, setShow] = useState(true);
+  // 초기값을 함수로 넘기면 첫 렌더에서 한 번만 실행됩니다.
+  const [show, setShow] = useState(shouldShow);
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
+    if (!show) return undefined;
+
+    try {
+      sessionStorage.setItem(STORAGE_KEY, '1');
+    } catch {
+      // 저장하지 못해도 이번 표시 자체에는 영향이 없습니다
+    }
+
     // 1초 동안 로고 표시 후 부드러운 페이드아웃 시작
     const fadeTimer = setTimeout(() => {
       setFading(true);
@@ -23,7 +46,7 @@ export default function SplashScreen() {
       clearTimeout(fadeTimer);
       clearTimeout(removeTimer);
     };
-  }, []);
+  }, [show]);
 
   if (!show) return null;
 

@@ -85,6 +85,7 @@ export default function Search() {
           <input
             ref={inputRef}
             type="text"
+            aria-label="음악 검색"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setIsFocused(true)}
