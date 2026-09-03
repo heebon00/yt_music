@@ -13,12 +13,12 @@
 
   --color-primary: #f1f1f1;
   --color-secondary: #9a9aa2;
-  --color-disabled: #6a6a72;
+  --color-disabled: #82828c;
 
   /* 채워진 면(버튼 · 칩 · 프로그레스)에 씁니다. 흰 글자와 5.68:1 */
   --color-accent: #cf032a;
-  /* 어두운 배경 위 글자 · 아이콘에 씁니다. 배경과 4.84:1 (같은 색은 3.47:1 로 미달) */
-  --color-accent-bright: #fb0433;
+  /* 어두운 배경/카드 위 글자 · 아이콘에 씁니다. elevated(#1f1f24) 및 base(#0b0b0c)와 4.8:1 이상 (WCAG AA 통과) */
+  --color-accent-bright: #ff4264;
   --color-accent-dim: #39050f;
 
   --font-sans: 'Pretendard Variable', Pretendard, system-ui, sans-serif;
